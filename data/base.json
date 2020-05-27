@@ -1,0 +1,1247 @@
+{
+  "wonders": [
+    {
+      "base_resource": "wood",
+      "name": "Statue de Zeus A",
+      "stages": [
+        {
+          "cost": {
+            "wood": 2
+          },
+          "effects": [
+            "gain:{vp=3}"
+          ],
+          "name": "olympiaA_stage_1",
+          "linked_building": "",
+          "type": "stage"
+        },
+        {
+          "cost": {
+            "stone": 2
+          },
+          "effects": [
+            "free_building"
+          ],
+          "name": "olympiaA_stage_2",
+          "linked_building": "olympiaA_stage_1",
+          "type": "stage"
+        },
+        {
+          "cost": {
+            "ore": 2
+          },
+          "effects": [
+            "gain:{vp=7}"
+          ],
+          "name": "olympiaA_stage_3",
+          "linked_building": "olympiaA_stage_2",
+          "type": "stage"
+        }
+      ]
+    },
+    {
+      "base_resource":"wood",
+      "name":"Statue de Zeus B",
+      "stages" : [
+        {
+          "cost": {"wood": 2},
+          "effects": [
+            "reduction:raw,left",
+            "reduction:raw,right"
+          ],
+          "name": "olympiaB_stage_1",
+          "linked_building": "",
+          "type": "stage"
+        },
+          {
+            "cost":{"stone":2},
+            "effects": [
+              "gain:{vp=5}"
+            ],
+            "name":"olympiaB_stage_2",
+            "linked_building":"olympiaB_stage_1",
+            "type":"stage"
+          },
+          {
+            "cost":{"ore":2,"fabric":1},
+            "effects": [
+              "copy:guild"
+            ],
+            "name":"olympiaB_stage_3",
+            "linked_building":"olympiaB_stage_2",
+            "type":"stage"
+          }
+        ]
+      },
+      {
+        "base_resource":"stone",
+        "name":"Pyramide de Gizeh A",
+        "stages": [
+          {
+           "cost":{"stone":2},
+           "effects": [
+            "gain:{vp=3}"
+           ],
+          "name":"gizaA_stage_1",
+          "linked_building":"",
+          "type":"stage"
+           },
+           {
+          "cost":{"wood":3},
+          "effects": [
+            "gain:{vp=5}"
+          ],
+          "name":"gizaA_stage_2",
+          "linked_building":"gizaA_stage_1",
+          "type":"stage"
+           },
+          {
+          "cost":{"stone":4},
+          "effects": [
+            "gain:{vp=7}"
+          ],
+          "name":"gizaA_stage_3",
+          "linked_building":"gizaA_stage_2",
+          "type":"stage"
+          }
+        ]
+      },
+    {
+      "base_resource":"stone",
+      "name":"Pyramide de Gizeh B",
+      "stages": [
+        {
+          "cost":{"wood":2},
+          "effects": [
+            "gain:{vp=3}"
+          ],
+          "name":"gizaB_stage_1",
+          "linked_building":"",
+          "type":"stage"
+        },
+        {
+          "cost":{"stone":3},
+          "effects": [
+            "gain:{vp=5}"
+          ],
+          "name":"gizaB_stage_2",
+          "linked_building":"gizaB_stage_1",
+          "type":"stage"
+        },
+        {
+          "cost":{"clay":3},
+          "effects": [
+            "gain:{vp=5}"
+          ],
+          "name":"gizaB_stage_3",
+          "linked_building":"gizaB_stage_2",
+          "type":"stage"
+        },
+        {
+          "age":-1,
+          "cost":{"stone":4, "papyrus":1},
+          "effects": [
+            "gain:{vp=7}"
+          ],
+          "name":"gizaB_stage_4",
+          "linked_building":"gizaB_stage_3",
+          "type":"stage"
+        }
+      ]
+    },
+    {
+      "base_resource":"clay",
+      "name":"Jardins suspendus de Babylone A",
+      "stages": [
+        {
+          "cost":{"clay":2},
+          "effects": [
+            "gain:{vp=3}"
+          ],
+          "name":"babylonA_stage_1",
+          "linked_building":"",
+          "type":"stage"
+        },
+        {
+          "cost":{"wood":3},
+          "effects": [
+            "gain:{symbol=1}"
+          ],
+          "name":"babylonA_stage_2",
+          "linked_building":"babylonA_stage_1",
+          "type":"stage"
+        },
+        {
+          "cost":{"clay":4},
+          "effects": [
+            "gain:{vp=7}"
+          ],
+          "name":"babylonA_stage_3",
+          "linked_building":"babylonA_stage_2",
+          "type":"stage"
+        }
+      ]
+    },
+    {
+      "base_resource":"clay",
+      "name":"Jardins suspendus de Babylone B",
+      "stages": [
+        {
+          "cost":{"clay":1,"fabric":1},
+          "effects": [
+            "gain:{vp=3}"
+          ],
+          "name":"babylonB_stage_1",
+          "linked_building":"",
+          "type":"stage"
+        },
+        {
+          "cost":{"wood":2,"glass":1},
+          "effects": [
+            "bonus_turn"
+          ],
+          "name":"babylonB_stage_2",
+          "linked_building":"babylonB_stage_1",
+          "type":"stage"
+        },
+        {
+          "cost":{"clay":3,"papyrus":1},
+          "effects": [
+            "gain:{symbol=1}"
+          ],
+          "name":"babylonB_stage_3",
+          "linked_building":"babylonB_stage_2",
+          "type":"stage"
+        }
+      ]
+    },
+    {
+      "base_resource":"ore",
+      "name":"Colosse de Rhodes A",
+      "stages": [
+        {
+          "cost":{"wood":2},
+          "effects": [
+            "gain:{vp=3}"
+          ],
+          "name":"rhodesA_stage_1",
+          "linked_building":"",
+          "type":"stage"
+        },
+        {
+          "cost":{"clay":3},
+          "effects": [
+            "gain:{shield=2}"
+          ],
+          "name":"rhodesA_stage_2",
+          "linked_building":"rhodesA_stage_1",
+          "type":"stage"
+        },
+        {
+          "cost":{"ore":4},
+          "effects": [
+            "gain:{vp=7}"
+          ],
+          "name":"rhodesA_stage_3",
+          "linked_building":"rhodesA_stage_2",
+          "type":"stage"
+        }
+      ]
+    },
+    {
+      "base_resource":"ore",
+      "name":"Colosse de Rhodes B",
+      "stages": [
+        {
+          "cost":{"stone":3},
+          "effects": [
+            "gain:{shield=1, vp=3, gold=3}"
+          ],
+          "name":"rhodesB_stage_1",
+          "linked_building":"",
+          "type":"stage"
+        },
+        {
+          "cost":{"ore":4},
+          "effects": [
+            "gain:{shield=1, vp=4, gold=4}"
+          ],
+          "name":"rhodesB_stage_2",
+          "linked_building":"rhodesB_stage_1",
+          "type":"stage"
+        }
+      ]
+    },
+    {
+      "base_resource":"glass",
+      "name":"Phare d'Alexandrie A",
+      "stages": [
+        {
+          "cost":{"stone":2},
+          "effects": [
+            "gain:{vp=3}"
+          ],
+          "name":"alexandriaA_stage_1",
+          "linked_building":"",
+          "type":"stage"
+        },
+        {
+          "cost":{"ore":2},
+          "effects": [
+            "gain:{raw=1}"
+          ],
+          "name":"alexandriaA_stage_2",
+          "linked_building":"alexandriaA_stage_1",
+          "type":"stage"
+        },
+        {
+          "cost":{"glass":2},
+          "effects": [
+            "gain:{vp=7}"
+          ],
+          "name":"alexandriaA_stage_3",
+          "linked_building":"alexandriaA_stage_2",
+          "type":"stage"
+        }
+      ]
+    },
+    {
+      "base_resource":"glass",
+      "name":"Phare d'Alexandrie B",
+      "stages": [
+        {
+          "cost":{"clay":2},
+          "effects": [
+            "gain:{raw=1}"
+          ],
+          "name":"alexandriaB_stage_1",
+          "linked_building":"",
+          "type":"stage"
+        },
+        {
+          "cost":{"wood":2},
+          "effects": [
+            "gain:{manufactured=1}"
+          ],
+          "name":"alexandriaB_stage_2",
+          "linked_building":"alexandriaB_stage_1",
+          "type":"stage"
+        },
+        {
+          "cost":{"stone":3},
+          "effects": [
+            "gain:{vp=7}"
+          ],
+          "name":"alexandriaB_stage_3",
+          "linked_building":"alexandriaB_stage_2",
+          "type":"stage"
+        }
+      ]
+    },
+    {
+      "base_resource":"fabric",
+      "name":"Mausolée d'Halicarnasse A",
+      "stages": [
+        {
+          "cost":{"clay":2},
+          "effects": [
+            "gain:{vp=3}"
+          ],
+          "name":"halicarnassusA_stage_1",
+          "linked_building":"",
+          "type":"stage"
+        },
+        {
+          "cost":{"ore":3},
+          "effects": [
+            "discard_search:0"
+          ],
+          "name":"halicarnassusA_stage_2",
+          "linked_building":"halicarnassusA_stage_1",
+          "type":"stage"
+        },
+        {
+          "cost":{"fabric":2},
+          "effects": [
+            "gain:{vp=7}"
+          ],
+          "name":"halicarnassusA_stage_3",
+          "linked_building":"halicarnassusA_stage_2",
+          "type":"stage"
+        }
+      ]
+    },
+    {
+      "base_resource":"fabric",
+      "name":"Mausolée d'Halicarnasse B",
+      "stages": [
+        {
+          "cost":{"ore":2},
+          "effects": [
+            "gain:{vp=2}",
+            "discard_search:0"
+          ],
+          "name":"halicarnassusB_stage_1",
+          "linked_building":"",
+          "type":"stage"
+        },
+        {
+          "cost":{"clay":2},
+          "effects": [
+            "gain:{vp=1}",
+            "discard_search:0"
+          ],
+          "name":"halicarnassusB_stage_2",
+          "linked_building":"halicarnassusB_stage_1",
+          "type":"stage"
+        },
+        {
+          "cost":{"glass":1,"fabric":1,"papyrus":1},
+          "effects": [
+            "discard_search:0"
+          ],
+          "name":"halicarnassusB_stage_3",
+          "linked_building":"halicarnassusB_stage_2",
+          "type":"stage"
+        }
+      ]
+    },
+    {
+      "base_resource":"papyrus",
+      "name":"Temple d'Artémis A",
+      "stages": [
+        {
+          "cost":{"stone":2},
+          "effects": [
+            "gain:{vp=3}"
+          ],
+          "name":"ephesesA_stage_1",
+          "linked_building":"",
+          "type":"stage"
+        },
+        {
+          "cost":{"wood":2},
+          "effects": [
+            "gain:{gold=9}"
+          ],
+          "name":"ephesesA_stage_2",
+          "linked_building":"ephesesA_stage_1",
+          "type":"stage"
+        },
+        {
+          "cost":{"papyrus":2},
+          "effects": [
+            "gain:{vp=7}"
+          ],
+          "name":"ephesesA_stage_3",
+          "linked_building":"ephesesA_stage_2",
+          "type":"stage"
+        }
+      ]
+    },
+    {
+      "base_resource":"papyrus",
+      "name":"Temple d'Artémis B",
+      "stages": [
+        {
+          "cost":{"stone":2},
+          "effects": [
+            "gain:{vp=2, gold=4}"
+          ],
+          "name":"ephesesB_stage_1",
+          "linked_building":"",
+          "type":"stage"
+        },
+        {
+          "cost":{"wood":2},
+          "effects": [
+            "gain:{vp=3, gold=4}"
+          ],
+          "name":"ephesesB_stage_2",
+          "linked_building":"ephesesB_stage_1",
+          "type":"stage"
+        },
+        {
+          "cost":{"glass":1,"fabric":1,"papyrus":1},
+          "effects": [
+            "gain:{vp=5, gold=4}"
+          ],
+          "name":"ephesesB_stage_3",
+          "linked_building":"ephesesB_stage_2",
+          "type":"stage"
+        }
+      ]
+    }
+  ],
+  "first": [
+    {
+      "cost":{},
+      "copies":"3,4",
+      "effects": [
+        "gain:{wood=1}"
+      ],
+      "name":"Chantier",
+      "linked_building":"",
+      "type":"raw"
+    },
+    {
+      "cost":{},
+      "copies":"3,5",
+      "effects": [
+        "gain:{stone=1}"
+      ],
+      "name":"Cavité",
+      "linked_building":"",
+      "type":"raw"
+    },
+    {
+      "cost":{},
+      "copies":"3,5",
+      "effects": [
+        "gain:{clay=1}"
+      ],
+      "name":"Bassin argileux",
+      "linked_building":"",
+      "type":"raw"
+    },
+    {
+      "cost":{},
+      "copies":"3,4",
+      "effects": [
+        "gain:{ore=1}"
+      ],
+      "name":"Filon",
+      "linked_building":"",
+      "type":"raw"
+    },
+    {
+      "cost":{"gold":1},
+      "copies":"6",
+      "effects": [
+        "gain:{wood/clay=1}"
+      ],
+      "name":"Friche",
+      "linked_building":"",
+      "type":"raw"
+    },
+    {
+      "cost":{"gold":1},
+      "copies":"4",
+      "effects": [
+        "gain:{stone/clay=1}"
+      ],
+      "name":"Excavation",
+      "linked_building":"",
+      "type":"raw"
+    },
+    {
+      "cost":{"gold":1},
+      "copies":"3",
+      "effects": [
+        "gain:{clay/ore=1}"
+      ],
+      "name":"Fosse argileuse",
+      "linked_building":"",
+      "type":"raw"
+    },
+    {
+      "cost":{"gold":1},
+      "copies":"3",
+      "effects": [
+        "gain:{stone/wood=1}"
+      ],
+      "name":"Exploitation forestière",
+      "linked_building":"",
+      "type":"raw"
+    },
+    {
+      "cost":{"gold":1},
+      "copies":"5",
+      "effects": [
+        "gain:{wood/ore=1}"
+      ],
+      "name":"Gisement",
+      "linked_building":"",
+      "type":"raw"
+    },
+    {
+      "cost":{"gold":1},
+      "copies":"6",
+      "effects": [
+        "gain:{ore/stone=1}"
+      ],
+      "name":"Mine",
+      "linked_building":"",
+      "type":"raw"
+    },
+    {
+      "cost":{},
+      "copies":"3,6",
+      "effects": [
+        "gain:{glass=1}"
+      ],
+      "name":"Verrerie",
+      "linked_building":"",
+      "type":"manufactured"
+    },
+    {
+      "cost":{},
+      "copies":"3,6",
+      "effects": [
+        "gain:{fabric=1}"
+      ],
+      "name":"Métier à tisser",
+      "linked_building":"",
+      "type":"manufactured"
+    },
+    {
+      "cost":{},
+      "copies":"3,6",
+      "effects": [
+        "gain:{papyrus=1}"
+      ],
+      "name":"Presse",
+      "linked_building":"",
+      "type":"manufactured"
+    },
+    {
+      "cost":{},
+      "copies":"4,7",
+      "effects": [
+        "gain:{vp=3}"
+      ],
+      "name":"Prêteur sur gages",
+      "linked_building":"",
+      "type":"public"
+    },
+    {
+      "cost":{"stone":1},
+      "copies":"3,7",
+      "effects": [
+        "gain:{vp=3}"
+      ],
+      "name":"Bains",
+      "linked_building":"",
+      "type":"public"
+    },
+    {
+      "cost":{},
+      "copies":"3,5",
+      "effects": [
+        "gain:{vp=2}"
+      ],
+      "name":"Autel",
+      "linked_building":"",
+      "type":"public"
+    },
+    {
+      "cost":{},
+      "copies":"3,6",
+      "effects": [
+        "gain:{vp=2}"
+      ],
+      "name":"Théâtre",
+      "linked_building":"",
+      "type":"public"
+    },
+    {
+      "cost":{},
+      "copies":"4,5,7",
+      "effects": [
+        "gain:{gold=5}"
+      ],
+      "name":"Taverne",
+      "linked_building":"",
+      "type":"economic"
+    },
+    {
+      "cost":{},
+      "copies":"3,7",
+      "effects": [
+        "reduction:raw,right"
+      ],
+      "name":"Comptoir Est",
+      "linked_building":"",
+      "type":"economic"
+    },
+    {
+      "cost":{},
+      "copies":"3,7",
+      "effects": [
+        "reduction:raw,left"
+      ],
+      "name":"Comptoir Ouest",
+      "linked_building":"",
+      "type":"economic"
+    },
+    {
+      "cost":{},
+      "copies":"3,6",
+      "effects": [
+        "reduction:manufactured,left",
+        "reduction:manufactured,right"
+      ],
+      "name":"Marché",
+      "linked_building":"",
+      "type":"economic"
+    },
+    {
+      "cost":{"wood":1},
+      "copies":"3,7",
+      "effects": [
+        "gain:{shield=1}"
+      ],
+      "name":"Palissade",
+      "linked_building":"",
+      "type":"military"
+    },
+    {
+      "cost":{"ore":1},
+      "copies":"3,5",
+      "effects": [
+        "gain:{shield=1}"
+      ],
+      "name":"Caserne",
+      "linked_building":"",
+      "type":"military"
+    },
+    {
+      "cost":{"clay":1},
+      "copies":"3,4",
+      "effects": [
+        "gain:{shield=1}"
+      ],
+      "name":"Tour de garde",
+      "linked_building":"",
+      "type":"military"
+    },
+    {
+      "cost":{"fabric":1},
+      "copies":"3,5",
+      "effects": [
+        "gain:{compass=1}"
+      ],
+      "name":"Officine",
+      "linked_building":"",
+      "type":"scientific"
+    },
+    {
+      "cost":{"glass":1},
+      "copies":"3,7",
+      "effects": [
+        "gain:{gear=1}"
+      ],
+      "name":"Atelier",
+      "linked_building":"",
+      "type":"scientific"
+    },
+    {
+      "cost":{"papyrus":1},
+      "copies":"3,4",
+      "effects": [
+        "gain:{tablet=1}"
+      ],
+      "name":"Scriptorium",
+      "linked_building":"",
+      "type":"scientific"
+    }
+  ],
+  "second": [
+    {
+      "cost":{"gold":1},
+      "copies":"3,4",
+      "effects": [
+        "gain:{wood=2}"
+      ],
+      "name":"Scierie",
+      "linked_building":"",
+      "type":"raw"
+    },
+    {
+      "cost":{"gold":1},
+      "copies":"3,4",
+      "effects": [
+        "gain:{stone=2}"
+      ],
+      "name":"Carrière",
+      "linked_building":"",
+      "type":"raw"
+    },
+    {
+      "cost":{"gold":1},
+      "copies":"3,4",
+      "effects": [
+        "gain:{clay=2}"
+      ],
+      "name":"Briqueterie",
+      "linked_building":"",
+      "type":"raw"
+    },
+    {
+      "cost":{"gold":1},
+      "copies":"3,4",
+      "effects": [
+        "gain:{ore=2}"
+      ],
+      "name":"Fonderie",
+      "linked_building":"",
+      "type":"raw"
+    },
+    {
+      "cost":{},
+      "copies":"3,5",
+      "effects": [
+        "gain:{glass=1}"
+      ],
+      "name":"Verrerie",
+      "linked_building":"",
+      "type":"manufactured"
+    },
+    {
+      "cost":{},
+      "copies":"3,5",
+      "effects": [
+        "gain:{fabric=1}"
+      ],
+      "name":"Métier à tisser",
+      "linked_building":"",
+      "type":"manufactured"
+    },
+    {
+      "cost":{},
+      "copies":"3,5",
+      "effects": [
+        "gain:{papyrus=1}"
+      ],
+      "name":"Presse",
+      "linked_building":"",
+      "type":"manufactured"
+    },
+    {
+      "cost":{"stone":3},
+      "copies":"3,7",
+      "effects": [
+        "gain:{vp=5}"
+      ],
+      "name":"Aqueduc",
+      "linked_building":"Bains",
+      "type":"public"
+    },
+    {
+      "cost":{"wood":1,"clay":1,"glass":1},
+      "copies":"3,6",
+      "effects": [
+        "gain:{vp=3}"
+      ],
+      "name":"Temple",
+      "linked_building":"Autel",
+      "type":"public"
+    },
+    {
+      "cost":{"wood":1,"ore":2},
+      "copies":"3,7",
+      "effects": [
+        "gain:{vp=4}"
+      ],
+      "name":"Statue",
+      "linked_building":"Théâtre",
+      "type":"public"
+    },
+    {
+      "cost":{"clay":2,"fabric":1},
+      "copies":"3,5",
+      "effects": [
+        "gain:{vp=4}"
+      ],
+      "name":"Tribunal",
+      "linked_building":"Scriptorium",
+      "type":"public"
+    },
+    {
+      "cost":{"clay":2},
+      "copies":"3,6,7",
+      "effects": [
+        "gain:{manufactured=1}"
+      ],
+      "name":"Forum",
+      "linked_building":"Comptoir",
+      "type":"economic"
+    },
+    {
+      "cost":{"wood":2},
+      "copies":"3,5,6",
+      "effects": [
+        "gain:{raw=1}"
+      ],
+      "name":"Caravansérail",
+      "linked_building":"Marché",
+      "type":"economic"
+    },
+    {
+      "cost":{},
+      "copies":"3,6",
+      "effects": [
+        "gain:(all-raw){gold=1}"
+      ],
+      "name":"Vignoble",
+      "linked_building":"",
+      "type":"economic"
+    },
+    {
+      "cost":{},
+      "copies":"4,7",
+      "effects": [
+        "gain:(all-manufactured){gold=2}"
+      ],
+      "name":"Bazar",
+      "linked_building":"",
+      "type":"economic"
+    },
+    {
+      "cost":{"stone":3},
+      "copies":"3,7",
+      "effects": [
+        "gain:{shield=2}"
+      ],
+      "name":"Muraille",
+      "linked_building":"",
+      "type":"military"
+    },
+    {
+      "cost":{"wood":1,"ore":2},
+      "copies":"4,6,7",
+      "effects": [
+        "gain:{shield=2}"
+      ],
+      "name":"Place d'armes",
+      "linked_building":"",
+      "type":"military"
+    },
+    {
+      "cost":{"wood":1,"clay":1,"ore":1},
+      "copies":"3,5",
+      "effects": [
+        "gain:{shield=2}"
+      ],
+      "name":"Écuries",
+      "linked_building":"Officine",
+      "type":"military"
+    },
+    {
+      "cost":{"wood":2,"ore":1},
+      "copies":"3,6",
+      "effects": [
+        "gain:{shield=2}"
+      ],
+      "name":"Champs de tir",
+      "linked_building":"Atelier",
+      "type":"military"
+    },
+    {
+      "cost":{"ore":2,"glass":1},
+      "copies":"3,4",
+      "effects": [
+        "gain:{compass=1}"
+      ],
+      "name":"Dispensaire",
+      "linked_building":"Officine",
+      "type":"scientific"
+    },
+    {
+      "cost":{"clay":2,"papyrus":1},
+      "copies":"3,5",
+      "effects": [
+        "gain:{gear=1}"
+      ],
+      "name":"Laboratoire",
+      "linked_building":"Atelier",
+      "type":"scientific"
+    },
+    {
+      "cost":{"stone":2,"fabric":1},
+      "copies":"3,6",
+      "effects": [
+        "gain:{tablet=1}"
+      ],
+      "name":"Bibliothèque",
+      "linked_building":"Scriptorium",
+      "type":"scientific"
+    },
+    {
+      "cost":{"wood":1,"papyrus":1},
+      "copies":"3,7",
+      "effects": [
+        "gain:{tablet=1}"
+      ],
+      "name":"École",
+      "linked_building":"",
+      "type":"scientific"
+    }
+  ],
+  "third": [
+    {
+      "cost":{"clay":2,"ore":1,"glass":1,"fabric":1,"papyrus":1},
+      "copies":"3,6",
+      "effects": [
+        "gain:{vp=7}"
+      ],
+      "name":"Panthéon",
+      "linked_building":"Temple",
+      "type":"public"
+    },
+    {
+      "cost":{"wood":1,"clay":2},
+      "copies":"3,4",
+      "effects": [
+        "gain:{vp=5}"
+      ],
+      "name":"Jardins",
+      "linked_building":"Statue",
+      "type":"public"
+    },
+    {
+      "cost":{"stone":2,"ore":1,"glass":1},
+      "copies":"3,5,6",
+      "effects": [
+        "gain:{vp=6}"
+      ],
+      "name":"Hôtel de ville",
+      "linked_building":"",
+      "type":"public"
+    },
+    {
+      "cost":{"wood":1,"stone":1,"clay":1,"ore":1,"glass":1,"fabric":1,"papyrus":1},
+      "copies":"3,7",
+      "effects": [
+        "gain:{vp=8}"
+      ],
+      "name":"Palace",
+      "linked_building":"",
+      "type":"public"
+    },
+    {
+      "cost":{"wood":2,"stone":1,"ore":1},
+      "copies":"3,5",
+      "effects": [
+        "gain:{vp=6}"
+      ],
+      "name":"Sénat",
+      "linked_building":"Bibliothèque",
+      "type":"public"
+    },
+    {
+      "cost":{"wood":1,"ore":1,"fabric":1},
+      "copies":"3,4",
+      "effects": [
+        "gain:(self-raw){gold=1, vp=1}"
+      ],
+      "name":"Port",
+      "linked_building":"Forum",
+      "type":"economic"
+    },
+    {
+      "cost":{"stone":1,"glass":1},
+      "copies":"3,6",
+      "effects": [
+        "gain:(self-economic){gold=1, vp=1}"
+      ],
+      "name":"Phare",
+      "linked_building":"Caravansérail",
+      "type":"economic"
+    },
+    {
+      "cost":{"clay":2,"papyrus":1},
+      "copies":"4,6",
+      "effects": [
+        "gain:(self-manufactured){gold=2, vp=2}"
+      ],
+      "name":"Chambre de commerce",
+      "linked_building":"",
+      "type":"economic"
+    },
+    {
+      "cost":{"stone":2,"ore":1},
+      "copies":"3,5,7",
+      "effects": [
+        "gain:(self-stage){gold=3, vp=1}"
+      ],
+      "name":"Arène",
+      "linked_building":"Dispensaire",
+      "type":"economic"
+    },
+    {
+      "cost":{"stone":1,"ore":3},
+      "copies":"3,7",
+      "effects": [
+        "gain:{shield=3}"
+      ],
+      "name":"Fortifications",
+      "linked_building":"Muraille",
+      "type":"military"
+    },
+    {
+      "cost":{"stone":3,"ore":1},
+      "copies":"4,5,6",
+      "effects": [
+        "gain:{shield=3}"
+      ],
+      "name":"Cirque",
+      "linked_building":"Place d'armes",
+      "type":"military"
+    },
+    {
+      "cost":{"wood":2,"ore":1,"fabric":1},
+      "copies":"3,4,7",
+      "effects": [
+        "gain:{shield=3}"
+      ],
+      "name":"Arsenal",
+      "linked_building":"",
+      "type":"military"
+    },
+    {
+      "cost":{"wood":1,"clay":3},
+      "copies":"3,5",
+      "effects": [
+        "gain:{shield=3}"
+      ],
+      "name":"Atelier de siège",
+      "linked_building":"Laboratoire",
+      "type":"military"
+    },
+    {
+      "cost":{"clay":2,"fabric":1,"papyrus":1},
+      "copies":"3,6",
+      "effects": [
+        "gain:{compass=1}"
+      ],
+      "name":"Loge",
+      "linked_building":"Dispensaire",
+      "type":"scientific"
+    },
+    {
+      "cost":{"ore":2,"glass":1,"fabric":1},
+      "copies":"3,7",
+      "effects": [
+        "gain:{gear=1}"
+      ],
+      "name":"Observatoire",
+      "linked_building":"Laboratoire",
+      "type":"scientific"
+    },
+    {
+      "cost":{"wood":2,"glass":1,"papyrus":1},
+      "copies":"3,4",
+      "effects": [
+        "gain:{tablet=1}"
+      ],
+      "name":"Université",
+      "linked_building":"Bibliothèque",
+      "type":"scientific"
+    },
+    {
+      "cost":{"stone":3,"glass":1},
+      "copies":"3,7",
+      "effects": [
+        "gain:{compass=1}"
+      ],
+      "name":"Académie",
+      "linked_building":"École",
+      "type":"scientific"
+    },
+    {
+      "cost":{"wood":1,"fabric":1,"papyrus":1},
+      "copies":"3,5",
+      "effects": [
+        "gain:{gear=1}"
+      ],
+      "name":"Étude",
+      "linked_building":"École",
+      "type":"scientific"
+    }
+  ],
+  "guilds": [
+    {
+      "cost":{"wood":1,"stone":1,"clay":1,"ore":2},
+      "effects": [
+        "gain:(neighbours-raw){vp=1}"
+      ],
+      "name":"Guilde des travailleurs",
+      "type":"guild"
+    },
+    {
+      "cost":{"stone":2,"ore":2},
+      "effects": [
+        "gain:(neighbours-manufactured){vp=2}"
+      ],
+      "name":"Guilde des artisans",
+      "type":"guild"
+    },
+    {
+      "cost":{"wood":3,"stone":1,"fabric":1},
+      "effects": [
+        "gain:(neighbours-public){vp=1}"
+      ],
+      "name":"Guilde des magistrats",
+      "type":"guild"
+    },
+    {
+      "cost":{"glass":1,"fabric":1,"papyrus":1},
+      "effects": [
+        "gain:(neighbours-economic){vp=1}"
+      ],
+      "name":"Guilde des commerçants",
+      "type":"guild"
+    },
+    {
+      "cost":{"clay":3,"fabric":1,"papyrus":1},
+      "effects": [
+        "gain:(neighbours-scientific){vp=1}"
+      ],
+      "name":"Guilde des philosophes",
+      "type":"guild"
+    },
+    {
+      "cost":{"clay":3,"glass":1},
+      "effects": [
+        "gain:(neighbours-military){vp=1}"
+      ],
+      "name":"Guilde des espions",
+      "type":"guild"
+    },
+    {
+      "cost":{"stone":1,"ore":2,"fabric":1},
+      "effects": [
+        "gain:(neighbours-defeat){vp=1}"
+      ],
+      "name":"Guilde des stratèges",
+      "type":"guild"
+    },
+    {
+      "cost":{"wood":3,"glass":1,"papyrus":1},
+      "effects": [
+        "gain:(self-raw){vp=1}",
+        "gain:(self-manufactured){vp=1}",
+        "gain:(self-guild){vp=1}"
+      ],
+      "name":"Guilde des armateurs",
+      "type":"guild"
+    },
+    {
+      "cost":{"stone":2,"clay":2,"glass":1},
+      "effects": [
+        "gain:(all-stage){vp=1}"
+      ],
+      "name":"Guilde des bâtisseurs",
+      "type":"guild"
+    },
+    {
+      "cost":{"wood":2,"ore":2,"papyrus":1},
+      "effects": [
+        "gain:{symbol=1}"
+      ],
+      "name":"Guilde des scientifiques",
+      "type":"guild"
+    }
+  ]
+}
