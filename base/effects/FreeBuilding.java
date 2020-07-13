@@ -16,6 +16,6 @@ public class FreeBuilding implements Effect {
 
     @Override
     public String toString() {
-        return "FreeBuilding{}";
+        return "FreeBuilding";
     }
 }

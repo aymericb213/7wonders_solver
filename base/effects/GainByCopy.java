@@ -3,10 +3,7 @@ package base.effects;
 import base.Building;
 import base.Player;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GainByCopy extends Gain {
 
@@ -20,20 +17,32 @@ public class GainByCopy extends Gain {
     }
 
     @Override
-    public void applyEffect(Player target) {
-        int copies_of_type=0;
+    public void applyEffect(Player target) {   //TODO: refactoring
+        int defeats = 0;
+        int wonder_stages = 0;
+        int copies_of_type = 0;
         List<Building> checklist = new ArrayList<>();
         if (check_range.equals("self") || check_range.equals("all")) {//bâtiments du joueur
-            checklist = target.getBuildings();
+            checklist.addAll(target.getBuildings());
+            wonder_stages += target.getWonder().getBuiltStages();
+            defeats += target.getDefeats();
         }
-        if (check_range.equals("neighbors") || check_range.equals("all")) {//bâtiments des voisins
+        if (check_range.equals("neighbours") || check_range.equals("all")) {//bâtiments des voisins
             for (Player neighbor : target.getHost().getNeighbours(target.getHost().getPlayers().indexOf(target))) {
                 checklist.addAll(neighbor.getBuildings());
+                wonder_stages += neighbor.getWonder().getBuiltStages();
+                defeats += neighbor.getDefeats();
             }
         }
-        for (Building b : checklist) {//dénombrement des bâtiments du type concerné
-            if (b.getType().equals(type)) {
-                copies_of_type++;
+        if (type.equals("defeat")) {
+            copies_of_type = defeats;
+        } else if (type.equals("stage")) {//assignation rapide pour les étapes de merveille
+            copies_of_type = wonder_stages;
+        } else {
+            for (Building b : checklist) {//dénombrement des bâtiments du type concerné
+                if (b.getType().equals(type)) {
+                    copies_of_type++;
+                }
             }
         }
         for (String key : gain.keySet()) {

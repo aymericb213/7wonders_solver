@@ -1,7 +1,6 @@
 package base;
 
 import base.effects.DiscardSearch;
-import base.effects.Effect;
 import data.JsonGameDataReader;
 
 import java.util.*;
@@ -34,17 +33,7 @@ public class Game {
       this.endgame = false;
       this.age = 1;
       this.discarded = new ArrayList<>();
-      this.discard_searches = new PriorityQueue<>((first, second) -> {
-          int value_first = first.getPriority();
-          int value_second = second.getPriority();
-          if (value_first > value_second) {
-              return -1;
-          } else if (value_first == value_second) {
-              return 0;
-          } else {
-              return 1;
-          }
-      });
+      this.discard_searches = new PriorityQueue<>(Comparator.comparingInt(DiscardSearch::getPriority));
       init(number_of_players);
   }
 
@@ -86,11 +75,11 @@ public class Game {
              System.out.println("Main : " + p.getHand());
              p.play();
          }
-         /*System.out.println("Défausse avant : " + discarded);
          while (!discard_searches.isEmpty()) {
-             discard_searches.poll().buildFromDiscard();
+             System.out.println("Défausse avant : " + discarded);
+             discard_searches.poll().pendingEffect();
+             System.out.println("Défausse après : " + discarded);
          }
-         System.out.println("Défausse après : " + discarded);*/
          nextTurn();
          turn++;
      }
@@ -174,11 +163,11 @@ public class Game {
      }
      //Résolution des conflits
      for (int i = 0; i < players.size(); i=i+2) {
-        Player[] enemies = getNeighbours(i);
+        ArrayList<Player> enemies = getNeighbours(i);
         Player p = players.get(i);
         for (Player enemy : enemies) {
             //si le nombre de joueurs est impair, on ignore le dernier calcul de la boucle car il est le même que le premier
-            if (players.size()%2 != 0 && i==players.size()-1 && enemy.equals(enemies[1])) {
+            if (players.size()%2 != 0 && i==players.size()-1 && enemy.equals(enemies.get(1))) {
                 break;
             }
             Map<String, Integer> player_resources = p.getResources();
@@ -205,7 +194,13 @@ public class Game {
               p.getPending().poll().applyEffect(p);
           }
           System.out.println(p + "\nBâtiments : " + p.getBuildings());
+          //TODO:gain monétaire
+          //TODO:calcul scientifique
       }
+  }
+
+  public int scienceScore() {
+      return 0;
   }
 
     /**
@@ -213,17 +208,17 @@ public class Game {
      * @param player_index L'indice du joueur dont on veut connaître les voisins.
      * @return Un tableau dont la première case contient le voisin de gauche et la seconde celui de droite.
      */
-  public Player[] getNeighbours(int player_index) {
-     Player[] res = new Player[2];
+  public ArrayList<Player> getNeighbours(int player_index) {
+     ArrayList<Player> res = new ArrayList<>(2);
      if (player_index==0) {//début de liste
-        res[0]= players.get(players.size()-1);
-        res[1]= players.get(player_index+1);
+        res.add(players.get(players.size()-1));
+        res.add(players.get(player_index+1));
      } else if (player_index==players.size()-1) {//fin de liste
-        res[0]= players.get(player_index-1);
-        res[1]= players.get(0);
+        res.add(players.get(player_index-1));
+        res.add(players.get(0));
      } else {//cas général
-        res[0]= players.get(player_index-1);
-        res[1]= players.get(player_index+1);
+        res.add(players.get(player_index-1));
+        res.add(players.get(player_index+1));
      }
      return res;
   }

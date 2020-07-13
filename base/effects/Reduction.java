@@ -15,8 +15,8 @@ public class Reduction implements Effect {
 
     @Override
     public void applyEffect(Player target) {
-        //TODO:réduction
-        System.out.println("Réduction de coût");
+        target.getReductions().put(type + "_" + side, true);
+        System.out.println("Réduction de coût pour " + type + " à " + side);
     }
 
     public String getType() {

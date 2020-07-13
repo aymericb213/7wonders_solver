@@ -9,10 +9,13 @@ public class Player {
 
     private Game host;
     private Wonder wonder;
-    private List<Building> buildings;
+    private Set<Building> buildings;
     private Map<String,Integer> resources;
     private Map<String,Integer> dual_resources;
+    private Map<String, Boolean> reductions;
+
     private int defeats;
+    private int nb_discarded;
     private List<Building> hand;
     private Queue<Effect> pending;
 
@@ -23,12 +26,18 @@ public class Player {
 
     public Player(Game host) {
         this.host = host;
-        this.buildings = new ArrayList<>();
+        this.buildings = new HashSet<>();
         this.resources = new HashMap<>();
         resources.put("gold", 3);
         resources.put("shield", 0);
         resources.put("vp", 0);
         this.dual_resources = new HashMap<>();
+        this.reductions = new HashMap<>();
+        reductions.put("raw_left", false);
+        reductions.put("raw_right", false);
+        reductions.put("manufactured_left", false);
+        reductions.put("manufactured_right", false);
+
         this.defeats = 0;
         this.hand = new ArrayList<>();
         this.pending = new LinkedList<>();
@@ -59,12 +68,7 @@ public class Player {
         for (Effect e : card.getEffects()) {
             e.applyEffect(this);
         }
-        boolean free = false;
-        for (Building b : buildings) {
-            if (b.getName().equals(card.getLinkedBuilding())) {
-                free=true;
-            }
-        }
+
         if (card.getCost().get("gold") != null && !isFree(card)) {
             resources.put("gold", resources.get("gold") - card.getCost().get("gold"));
         }
@@ -96,6 +100,7 @@ public class Player {
         host.getDiscarded().add(card);
         hand.remove(card);
         resources.put("gold", resources.get("gold")+3);
+        nb_discarded++;
     }
 
     /**
@@ -104,13 +109,12 @@ public class Player {
      * @return Le résultat du test.
      */
     public boolean canBuild(Building card) {
+        if (buildings.contains(card)) {
+            System.out.println("magnanime");
+            return false;
+        }
         if (isFree(card)) {
             return true;
-        }
-        for (Building b : buildings) {
-            if (b.getName().equals(card.getName())) {
-                return false;
-            }
         }
         int card_gold_cost = card.getCost().get("gold") == null ? 0 : card.getCost().get("gold");
         if (card_gold_cost > resources.get("gold")) {//si le joueur n'a pas assez d'or, inutile de tester les autres ressources
@@ -142,8 +146,12 @@ public class Player {
                        }
                    }
                 }
+                if  (free_building > 0 && diff > 0) {//capacité de la statue de Zeus, si activée
+                    free_building--;
+                    break;
+                }
                 if (diff > 0) {//achat chez les voisins
-                    Player[] neighbours = host.getNeighbours(host.getPlayers().indexOf(this));
+                    ArrayList<Player> neighbours = host.getNeighbours(host.getPlayers().indexOf(this));
                     for (Player neighbour : neighbours) {
                        Map<String,Integer> buyable = new HashMap<>(neighbour.getResources());
                        buyable.putAll(neighbour.getDualResources());
@@ -151,7 +159,7 @@ public class Player {
                     }//TODO:système d'achat
                 }
                 if (diff > 0) {//dernier test, échec si le coût n'est toujours pas atteint
-                    System.out.println("Pas assez de " + required);
+                    System.out.println(card.getName() + " : pas assez de " + required);
                     return false;
                 }
             }
@@ -166,6 +174,10 @@ public class Player {
             }
         }
         return false;
+    }
+
+    public int play_count() {
+        return this.getBuildings().size() + this.getNbDiscarded() + this.getWonder().getBuiltStages();
     }
 
     public Game getHost() {
@@ -184,11 +196,11 @@ public class Player {
         this.wonder = wonder;
     }
 
-    public List<Building> getBuildings() {
+    public Set<Building> getBuildings() {
         return this.buildings;
     }
 
-    public void setBuildings(List<Building> buildings) {
+    public void setBuildings(Set<Building> buildings) {
         this.buildings = buildings;
     }
 
@@ -206,6 +218,14 @@ public class Player {
 
     public void setDualResources(Map<String, Integer> dual_resources) {
         this.dual_resources = dual_resources;
+    }
+
+    public Map<String, Boolean> getReductions() {
+        return reductions;
+    }
+
+    public void setReductions(Map<String, Boolean> reductions) {
+        this.reductions = reductions;
     }
 
     public int getDefeats() {
@@ -256,11 +276,19 @@ public class Player {
         this.playstyle = playstyle;
     }
 
+    public int getNbDiscarded() {
+        return nb_discarded;
+    }
+
+    public void setNbDiscarded(int nb_discarded) {
+        this.nb_discarded = nb_discarded;
+    }
+
     public String shortString() {
-        return "\n" + wonder.shortString() + "\n" + resources  + "\nBâtiments :" + buildings;
+        return "\n" + wonder.shortString() + "\n" + play_count() + "\n" + resources + "\nBâtiments :" + buildings;
     }
 
     public String toString() {
-        return "\n" + wonder.shortString() + "\n" + resources + "\n" + dual_resources + "\nMain :" + hand;
+        return "\n" + wonder.shortString() + "\n" + play_count() + "\nCartes défaussées : " + nb_discarded + "\n" + resources + "\n" + dual_resources + "\nMain :" + hand;
     }
 }

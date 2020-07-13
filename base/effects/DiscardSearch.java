@@ -23,17 +23,19 @@ public class DiscardSearch implements Effect {
         target.getHost().getDiscardSearches().offer(this);
     }
 
-    public void buildFromDiscard() {
+    public void pendingEffect() {      //TODO: smart build choice
         List<Building> discard = new ArrayList<>(owner.getHost().getDiscarded());
-        for (Building built : owner.getBuildings()) {
-            String match = built.getName();
-            discard.removeIf(b -> b.getName().regionMatches(0, match , 0, match.length() - 1));
+        if (discard.size() > 0) {
+            for (Building built : owner.getBuildings()) {
+                String match = built.getName();
+                discard.removeIf(b -> b.getName().regionMatches(0, match , 0, match.length() - 1));
+            }
+            Collections.shuffle(discard);
+            Building b = discard.get(0);
+            owner.getBuildings().add(b);
+            owner.getHost().getDiscarded().remove(b);
+            System.out.println("Construction depuis la défausse");
         }
-        Collections.shuffle(discard);
-        Building b = discard.get(0);
-        owner.getBuildings().add(b);
-        owner.getHost().getDiscarded().remove(b);
-        System.out.println("Construction depuis la défausse");
     }
 
     public int getPriority() {
