@@ -33,9 +33,9 @@ public class Copy implements Effect {
                 }
                 int guild_vp = target.getResources().get("vp") - original_vp_value;
                 if (guild.getName().contains("scientifique")) {//calcul spécial pour la guilde des scientifiques
-                    int max_science = target.getHost().scienceScore();
+                    int max_science = target.getHost().scienceScore(target, 0);
                     target.getResources().put("symbol", target.getResources().get("symbol") -1);
-                    guild_vp = max_science - target.getHost().scienceScore();
+                    guild_vp = max_science - target.getHost().scienceScore(target, 0);
                 } else {
                     target.getResources().put("vp", original_vp_value);
                 }

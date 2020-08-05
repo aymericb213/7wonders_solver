@@ -193,14 +193,43 @@ public class Game {
           while (!p.getPending().isEmpty()) {//ajout des points dépendant de l'état final du jeu
               p.getPending().poll().applyEffect(p);
           }
+          int money_vp = p.getResources().get("gold")/3;//points de victoire basés sur l'argent récolté
+          int science_vp = scienceScore(p, 0);
+          p.getResources().put("vp", p.getResources().get("vp") + money_vp + science_vp);
+          System.out.println("Points de science : " + science_vp);
           System.out.println(p + "\nBâtiments : " + p.getBuildings());
-          //TODO:gain monétaire
-          //TODO:calcul scientifique
       }
   }
 
-  public int scienceScore() {
-      return 0;
+  public int scienceScore(Player p, int best_value) {
+      if (p.getResources().get("symbol") == null || p.getResources().get("symbol") == 0) {
+          boolean trio = true;
+          int score = 0;
+
+          for (String science_symbol : new String[]{"gear", "tablet", "compass"}) {//familles de symboles identiques
+              Integer nb = p.getResources().get(science_symbol);
+              if (nb == null) {
+                  trio = false;
+              } else {
+                  score += Math.pow(nb, 2);
+              }
+          }
+          if (trio) {//groupes de symboles différents
+              int nb = Math.min(p.getResources().get("gear"), Math.min(p.getResources().get("compass"), p.getResources().get("tablet")));
+              score += nb*7;
+          }
+          return Math.max(score, best_value);
+      }
+      Player decoy = new Player(this);
+      decoy.getResources().putAll(p.getResources());
+      decoy.getResources().put("symbol", decoy.getResources().get("symbol") -1);
+      for (String science_symbol : new String[]{"gear", "tablet", "compass"}) {
+          decoy.getResources().put(science_symbol, decoy.getResources().get(science_symbol) == null ? 1 : decoy.getResources().get(science_symbol) + 1);
+          int opti = scienceScore(decoy, best_value);
+          best_value = Math.max(opti, best_value);
+          decoy.getResources().put(science_symbol, decoy.getResources().get(science_symbol) - 1);
+      }
+      return best_value;
   }
 
     /**

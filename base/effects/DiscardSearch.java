@@ -28,8 +28,10 @@ public class DiscardSearch implements Effect {
         if (discard.size() > 0) {
             for (Building built : owner.getBuildings()) {
                 String match = built.getName();
-                discard.removeIf(b -> b.getName().regionMatches(0, match , 0, match.length() - 1));
+                discard.removeIf(b -> b.getName().regionMatches(0, match, 0, match.length() - 1));
             }
+        }
+        if (discard.size() > 0) {
             Collections.shuffle(discard);
             Building b = discard.get(0);
             owner.getBuildings().add(b);

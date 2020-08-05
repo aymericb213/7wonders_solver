@@ -110,7 +110,6 @@ public class Player {
      */
     public boolean canBuild(Building card) {
         if (buildings.contains(card)) {
-            System.out.println("magnanime");
             return false;
         }
         if (isFree(card)) {
@@ -124,13 +123,15 @@ public class Player {
         int diff;
         int raw = resources.get("raw") == null ? 0 : resources.get("raw");
         int manufactured = resources.get("manufactured") == null ? 0 : resources.get("manufactured");
+        Map<String, Integer> dual = new HashMap<>(this.dual_resources);
         for (String required : card.getCost().keySet()) {
             int available = resources.get(required) == null ? 0 : resources.get(required);
             diff = card.getCost().get(required) - available;//calcul de base
             if (diff > 0) {
-                for (String dual : dual_resources.keySet()) {//ressources à double type
-                   if (dual.contains(required)) {//TODO:effacer double ressource après attribution
-                       diff -= dual_resources.get(dual);
+                for (String dual_resource : dual.keySet()) {//ressources à double type
+                   if (dual_resource.contains(required)) {//TODO:effacer double ressource après attribution
+                       diff -= dual.get(dual_resource);
+                       dual.put(dual_resource, dual.get(dual_resource) > 0 ? dual.get(dual_resource) -1 : 0);
                    }
                 }
                 if (diff > 0 && (raw>0 || manufactured>0)) {//ressources "joker", passage unique par wrapper
