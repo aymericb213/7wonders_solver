@@ -1,15 +1,15 @@
 package strategies;
 
 import base.Building;
-import base.Player;
+import base.players.RealPlayer;
 
 import java.util.Random;
 
 public class FullDiscard implements PlayerStrategy {
 
-    private Player client;
+    private RealPlayer client;
 
-    public FullDiscard(Player client) {
+    public FullDiscard(RealPlayer client) {
         this.client = client;
     }
 

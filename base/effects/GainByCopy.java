@@ -1,7 +1,8 @@
 package base.effects;
 
 import base.Building;
-import base.Player;
+import base.players.PlayerProxy;
+import base.players.RealPlayer;
 
 import java.util.*;
 
@@ -17,7 +18,7 @@ public class GainByCopy extends Gain {
     }
 
     @Override
-    public void applyEffect(Player target) {   //TODO: refactoring
+    public void applyEffect(RealPlayer target) {
         int defeats = 0;
         int wonder_stages = 0;
         int copies_of_type = 0;
@@ -28,10 +29,10 @@ public class GainByCopy extends Gain {
             defeats += target.getDefeats();
         }
         if (check_range.equals("neighbours") || check_range.equals("all")) {//bâtiments des voisins
-            for (Player neighbor : target.getHost().getNeighbours(target.getHost().getPlayers().indexOf(target))) {
-                checklist.addAll(neighbor.getBuildings());
-                wonder_stages += neighbor.getWonder().getBuiltStages();
-                defeats += neighbor.getDefeats();
+            for (PlayerProxy neighbor : target.getNeighbours(target.getHost().getPlayers().indexOf(target))) {
+                checklist.addAll(neighbor.getClient().getBuildings());
+                wonder_stages += neighbor.getClient().getWonder().getBuiltStages();
+                defeats += neighbor.getClient().getDefeats();
             }
         }
         if (type.equals("defeat")) {

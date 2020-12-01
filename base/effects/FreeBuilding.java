@@ -1,7 +1,6 @@
 package base.effects;
 
-import base.Game;
-import base.Player;
+import base.players.RealPlayer;
 
 public class FreeBuilding implements Effect {
 
@@ -9,7 +8,7 @@ public class FreeBuilding implements Effect {
     }
 
     @Override
-    public void applyEffect(Player target) {
+    public void applyEffect(RealPlayer target) {
         target.setFreeBuilding(4 - target.getHost().getAge());
         System.out.println("Bâtiments gratuits");
     }

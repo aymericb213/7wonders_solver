@@ -1,7 +1,7 @@
 package base.effects;
 
-import base.Player;
+import base.players.RealPlayer;
 
 public interface Effect {
-  public void applyEffect(Player target);
+  void applyEffect(RealPlayer target);
 }

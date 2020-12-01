@@ -1,6 +1,6 @@
 package base.effects;
 
-import base.Player;
+import base.players.RealPlayer;
 
 import java.util.Map;
 
@@ -13,12 +13,11 @@ public class Gain implements Effect {
     }
 
     @Override
-    public void applyEffect(Player target) {
+    public void applyEffect(RealPlayer target) {
         Map<String, Integer> target_resources;
         for (String key : gain.keySet()) {
-            target_resources = key.contains("/") ? target.getDualResources() : target.getResources();
-            int value_to_update = target_resources.get(key) == null ? 0 : target_resources.get(key);
-            target_resources.put(key, value_to_update + gain.get(key));
+            target_resources = key.contains("/") ? target.getProxy().getDualResources() : target.getProxy().getResources();
+            target.getProxy().giveResourceTo(target_resources, key, gain.get(key));
         }
     }
 

@@ -1,7 +1,6 @@
 package base.effects;
 
-import base.Player;
-import base.effects.Effect;
+import base.players.RealPlayer;
 
 public class Reduction implements Effect {
 
@@ -14,7 +13,7 @@ public class Reduction implements Effect {
     }
 
     @Override
-    public void applyEffect(Player target) {
+    public void applyEffect(RealPlayer target) {
         target.getReductions().put(type + "_" + side, true);
         System.out.println("Réduction de coût pour " + type + " à " + side);
     }

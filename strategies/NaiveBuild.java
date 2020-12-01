@@ -1,14 +1,14 @@
 package strategies;
 
 import base.Building;
-import base.Player;
+import base.players.RealPlayer;
 import base.Wonder;
 
 public class NaiveBuild implements PlayerStrategy {
 
-  private Player client;
+  private RealPlayer client;
 
-  public NaiveBuild(Player client) {
+  public NaiveBuild(RealPlayer client) {
     this.client = client;
   }
 

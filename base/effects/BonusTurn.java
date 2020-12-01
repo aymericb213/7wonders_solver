@@ -1,6 +1,6 @@
 package base.effects;
 
-import base.Player;
+import base.players.RealPlayer;
 
 public class BonusTurn implements Effect {
 
@@ -8,7 +8,7 @@ public class BonusTurn implements Effect {
     }
 
     @Override
-    public void applyEffect(Player target) {
+    public void applyEffect(RealPlayer target) {
         System.out.println("Tour supplémentaire");
         target.setBonusTurn(true);
     }

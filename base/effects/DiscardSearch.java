@@ -1,7 +1,7 @@
 package base.effects;
 
 import base.Building;
-import base.Player;
+import base.players.RealPlayer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DiscardSearch implements Effect {
 
-    private Player owner;
+    private RealPlayer owner;
     private int priority;
 
     public DiscardSearch(int priority) {
@@ -17,7 +17,7 @@ public class DiscardSearch implements Effect {
     }
 
     @Override
-    public void applyEffect(Player target) {
+    public void applyEffect(RealPlayer target) {
         owner = target;
         System.out.println("Choix d'une carte défaussée");
         target.getHost().getDiscardSearches().offer(this);

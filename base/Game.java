@@ -1,7 +1,9 @@
 package base;
 
 import base.effects.DiscardSearch;
-import data.JsonGameDataReader;
+import base.players.PlayerProxy;
+import base.players.RealPlayer;
+import data.JSONGameDataReader;
 
 import java.util.*;
 
@@ -17,7 +19,7 @@ public class Game {
   private List<Building> age_3_deck;
   private List<Wonder> wonders;
 
-  private List<Player> players;
+  private List<RealPlayer> players;
   private int age;
   private boolean endgame;
   private List<Building> discarded;
@@ -30,8 +32,8 @@ public class Game {
       this.age_3_deck = new ArrayList<>();
       this.wonders = new ArrayList<>();
       this.players = new ArrayList<>(number_of_players);
-      this.endgame = false;
       this.age = 1;
+      this.endgame = false;
       this.discarded = new ArrayList<>();
       this.discard_searches = new PriorityQueue<>(Comparator.comparingInt(DiscardSearch::getPriority));
       init(number_of_players);
@@ -44,11 +46,11 @@ public class Game {
       System.out.println("Initialisation");
     //Création des joueurs
     for (int i = 1 ; i < number_of_players + 1; i++) {
-      players.add(new Player(this));
+      players.add(new RealPlayer(this));
     }
 
     //Chargement des cartes utilisées dans la partie
-    JsonGameDataReader reader = new JsonGameDataReader(this, "data/base.json");
+    JSONGameDataReader reader = new JSONGameDataReader(this, "data/base.json");
     reader.buildDecks(number_of_players);
 
     for (int j = 0; j < number_of_players; j++) {
@@ -68,13 +70,14 @@ public class Game {
   /** Joue la partie et affiche le résultat.*/
   public void play() {
      int turn = 1;
-     while (age<3 || !(players.get(0).getHand().isEmpty())) {
+      while (age<3 || !(players.get(0).getHand().isEmpty())) {
          System.out.println("Tour " + turn);
-         for (Player p : players) {
+         for (RealPlayer p : players) {
              System.out.println(p.shortString());
              System.out.println("Main : " + p.getHand());
              p.play();
          }
+         players.forEach(p -> p.getProxy().updateClientResources());
          while (!discard_searches.isEmpty()) {
              System.out.println("Défausse avant : " + discarded);
              discard_searches.poll().pendingEffect();
@@ -102,7 +105,7 @@ public class Game {
           players.get(players.size()-1).setHand(tmp_hand);
       }
       if (players.get(0).getHand().size()==1) {
-          for (Player p : players) {
+          for (RealPlayer p : players) {
               if (p.bonusTurn()) {//tour supplémentaire
                   p.play();
                   p.setBonusTurn(false);
@@ -136,7 +139,7 @@ public class Game {
   public void fillHands(List<Building> deck) {
       Collections.shuffle(deck);
       while (!(deck.isEmpty())) {
-          for (Player p : players) {
+          for (RealPlayer p : players) {
              p.getHand().add(deck.get(0));
              deck.remove(0);
           }
@@ -163,9 +166,9 @@ public class Game {
      }
      //Résolution des conflits
      for (int i = 0; i < players.size(); i=i+2) {
-        ArrayList<Player> enemies = getNeighbours(i);
-        Player p = players.get(i);
-        for (Player enemy : enemies) {
+         RealPlayer p = players.get(i);
+         List<PlayerProxy> enemies = p.getNeighbours(i);
+         for (PlayerProxy enemy : enemies) {
             //si le nombre de joueurs est impair, on ignore le dernier calcul de la boucle car il est le même que le premier
             if (players.size()%2 != 0 && i==players.size()-1 && enemy.equals(enemies.get(1))) {
                 break;
@@ -175,7 +178,7 @@ public class Game {
             if (player_resources.get("shield") > enemy_resources.get("shield")) {//victoire
                player_resources.put("vp", player_resources.get("vp")+vp_gain);
                enemy_resources.put("vp", enemy_resources.get("vp")-1);
-               enemy.setDefeats(enemy.getDefeats()+1);
+               enemy.getClient().setDefeats(enemy.getClient().getDefeats()+1);
             } else if (player_resources.get("shield") < enemy_resources.get("shield")) {//défaite
                 player_resources.put("vp", player_resources.get("vp")-1);
                 enemy_resources.put("vp", enemy_resources.get("vp")+vp_gain);
@@ -189,7 +192,7 @@ public class Game {
   public void computeScores() {
       System.out.println("\nPartie terminée");
       System.out.println("\nDéfausse : \n" + discarded + "\n");
-      for (Player p : players) {
+      for (RealPlayer p : players) {
           while (!p.getPending().isEmpty()) {//ajout des points dépendant de l'état final du jeu
               p.getPending().poll().applyEffect(p);
           }
@@ -201,7 +204,7 @@ public class Game {
       }
   }
 
-  public int scienceScore(Player p, int best_value) {
+  public int scienceScore(RealPlayer p, int best_value) {
       if (p.getResources().get("symbol") == null || p.getResources().get("symbol") == 0) {
           boolean trio = true;
           int score = 0;
@@ -220,7 +223,7 @@ public class Game {
           }
           return Math.max(score, best_value);
       }
-      Player decoy = new Player(this);
+      RealPlayer decoy = new RealPlayer(this);
       decoy.getResources().putAll(p.getResources());
       decoy.getResources().put("symbol", decoy.getResources().get("symbol") -1);
       for (String science_symbol : new String[]{"gear", "tablet", "compass"}) {
@@ -230,26 +233,6 @@ public class Game {
           decoy.getResources().put(science_symbol, decoy.getResources().get(science_symbol) - 1);
       }
       return best_value;
-  }
-
-    /**
-     * Retourne les voisins du joueur donné.
-     * @param player_index L'indice du joueur dont on veut connaître les voisins.
-     * @return Un tableau dont la première case contient le voisin de gauche et la seconde celui de droite.
-     */
-  public ArrayList<Player> getNeighbours(int player_index) {
-     ArrayList<Player> res = new ArrayList<>(2);
-     if (player_index==0) {//début de liste
-        res.add(players.get(players.size()-1));
-        res.add(players.get(player_index+1));
-     } else if (player_index==players.size()-1) {//fin de liste
-        res.add(players.get(player_index-1));
-        res.add(players.get(0));
-     } else {//cas général
-        res.add(players.get(player_index-1));
-        res.add(players.get(player_index+1));
-     }
-     return res;
   }
 
     public String getId() {
@@ -292,15 +275,15 @@ public class Game {
         this.wonders = wonders;
     }
 
-    public List<Player> getPlayers() {
+    public List<RealPlayer> getPlayers() {
     return this.players;
   }
 
-    public void setPlayers(List<Player> players) {
+    public void setPlayers(List<RealPlayer> players) {
     this.players = players;
   }
 
-	public int getAge() {
+    public int getAge() {
 		return this.age;
 	}
 
